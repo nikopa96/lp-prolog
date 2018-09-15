@@ -39,7 +39,7 @@ female(veronica).
 female(valeria).
 
 father(Child, Father):- male(Father), married(Mother, Father), mother(Child, Mother).
-brother(Child, Brother):- male(Brother), mother(Child, Mother), mother(Brother, Mother), father(Child, Father), father(Brother, Father).
+brother(Child, Brother):- male(Brother), mother(Child, Mother), mother(Brother, Mother), father(Child, Father), father(Brother, Father), married(Mother, Father).
 sister(Child, Sister):- female(Sister), mother(Child, Mother), mother(Sister, Mother), father(Child, Father), father(Sister, Father).
 aunt(Child, Aunt):- female(Aunt), (sister(Father, Aunt), father(Child, Father)); (sister(Mother, Aunt), mother(Child, Mother)).
 uncle(Child, Uncle):- male(Uncle), (brother(Father, Uncle), father(Child, Father)); (brother(Mother, Uncle), mother(Child, Mother)).
