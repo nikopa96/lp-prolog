@@ -54,11 +54,28 @@ uncle(Child, Uncle):- male(Uncle), (brother(Father, Uncle), father(Child, Father
 grandmother(Child, Grandmother):- female(Grandmother), (mother(Child, Mother), mother(Mother, Grandmother)); (father(Child, Father), mother(Father, Grandmother)).
 grandfather(Child, Grandfather):- male(Grandfather), grandmother(Child, Grandmother), married(Grandmother, Grandfather).
 
-ancestor(Child, Parent):- mother(Child, Parent); father(Child, Parent).
-ancestor(Child, Parent):- (mother(Child, Mother), ancestor(Mother, Parent)); (father(Child, Father), ancestor(Father, Parent)).
+ancestor(Child, Parent):-
+    mother(Child, Parent);
+    father(Child, Parent).
+ancestor(Child, Parent):-
+    (mother(Child, Mother), ancestor(Mother, Parent));
+    (father(Child, Father), ancestor(Father, Parent)).
 
-female_ancestor(Child, Parent):- mother(Child, Parent).
-female_ancestor(Child, Parent):- mother(Child, Mother), female_ancestor(Mother, Parent).
+female_ancestor(Child, Parent):-
+    mother(Child, Parent).
+female_ancestor(Child, Parent):-
+    mother(Child, Mother),
+    female_ancestor(Mother, Parent).
 
-male_ancestor(Child, Parent):- father(Child, Parent).
-male_ancestor(Child, Parent):- (mother(Child, Mother), male_ancestor(Mother, Parent)); (father(Child, Father), male_ancestor(Father, Parent)).
+male_ancestor(Child, Parent):-
+    father(Child, Parent).
+male_ancestor(Child, Parent):-
+    (mother(Child, Mother), male_ancestor(Mother, Parent));
+    (father(Child, Father), male_ancestor(Father, Parent)).
+
+ancestor1(Child, Parent, N):- N =:= 1,
+    (mother(Child, Parent); father(Child, Parent)).
+ancestor1(Child, Parent, N):- N > 1,
+    ((mother(Child, Mother), ancestor1(Mother, Parent, N - 1));
+    (father(Child, Father), ancestor1(Father, Parent, N - 1))).
+
