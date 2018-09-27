@@ -61,5 +61,4 @@ female_ancestor(Child, Parent):- mother(Child, Parent).
 female_ancestor(Child, Parent):- mother(Child, Mother), female_ancestor(Mother, Parent).
 
 male_ancestor(Child, Parent):- father(Child, Parent).
-male_ancestor(Child, Parent):- father(Child, Father), male_ancestor(Father, Parent).
-
+male_ancestor(Child, Parent):- (mother(Child, Mother), male_ancestor(Mother, Parent)); (father(Child, Father), male_ancestor(Father, Parent)).

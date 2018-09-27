@@ -55,7 +55,7 @@ grandmother(Child, Grandmother):- female(Grandmother), (mother(Child, Mother), m
 grandfather(Child, Grandfather):- male(Grandfather), grandmother(Child, Grandmother), married(Grandmother, Grandfather).
 
 ancestor(Child, Parent):- mother(Child, Parent); father(Child, Parent).
-ancestor(Child, Parent):- mother(Child, Mother), ancestor(Mother, Parent).
+ancestor(Child, Parent):- (mother(Child, Mother), ancestor(Mother, Parent)); (father(Child, Father), ancestor(Father, Parent)).
 
 female_ancestor(Child, Parent):- mother(Child, Parent).
 female_ancestor(Child, Parent):- mother(Child, Mother), female_ancestor(Mother, Parent).
