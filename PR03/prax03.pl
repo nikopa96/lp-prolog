@@ -9,11 +9,12 @@ mother(martin, kersti).
 mother(piret, kersti).
 mother(mart, veronica).
 mother(eevi, veronica).
-mother(toomas, valeria).
-mother(veronica, valeria).
-mother(aleksei, valeria).
-mother(valeria, oksana).
-mother(tom, ksenia).
+mother(kersti, valeria).
+mother(toomas, oksana).
+mother(veronica, kaja).
+mother(ago, ksenia).
+mother(ott, ksenia).
+mother(mihkel, ksenia).
 
 married(kelly, martin).
 married(piret, mart).
@@ -22,6 +23,7 @@ married(kersti, toomas).
 married(veronica, ago).
 married(valeria, tom).
 married(oksana, jack).
+married(kaja, andrus).
 married(ksenia, joshua).
 
 male(erki).
@@ -32,10 +34,12 @@ male(martin).
 male(mart).
 male(david).
 male(toomas).
-male(aleksei).
 male(ago).
+male(ott).
+male(mihkel).
 male(tom).
 male(jack).
+male(andrus).
 male(joshua).
 
 female(evelin).
@@ -48,6 +52,7 @@ female(kersti).
 female(veronica).
 female(valeria).
 female(oksana).
+female(kaja).
 female(ksenia).
 
 father(Child, Father):-
