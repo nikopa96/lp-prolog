@@ -101,8 +101,8 @@ ancestor(Child, Parent):-
 female_ancestor(Child, Parent):-
     mother(Child, Parent).
 female_ancestor(Child, Parent):-
-    mother(Child, Mother),
-    female_ancestor(Mother, Parent).
+    (mother(Child, Mother), female_ancestor(Mother, Parent));
+    (father(Child, Father), female_ancestor(Father, Parent)).
 
 male_ancestor(Child, Parent):-
     father(Child, Parent).
