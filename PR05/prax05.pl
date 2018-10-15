@@ -12,11 +12,11 @@ suurim([El1, El2|Tail], NewList):-
     (El1 >= El2, suurim([El2|Tail], TempList), append([El1], TempList, NewList));
     (El1 < El2, suurim([El2|Tail], TempList), append([El2], TempList, NewList)).
 
+paki([], []).
 paki([El], [El]).
-paki([El, El|Tail], NewList):-
-    paki([El|Tail], NewList), !.
-paki([El1, El2|Tail1], [El1|Tail2]):-
-    paki([El2|Tail1], Tail2).
+paki([El1, El2|Tail], NewList):-
+    ((El1 = El2, append([El1], TempList, NewList), paki(Tail, TempList));
+    (not(El1 = El2), append([El1], TempList, NewList), paki(Tail, TempList))), !.
 
 duplikeeri([], []).
 duplikeeri([El1|Tail], NewList):-
