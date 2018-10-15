@@ -14,14 +14,18 @@ suurim([El1, El2|Tail], NewList):-
 
 paki([], []).
 paki([El], [El]).
-paki([El1, El2|Tail], NewList):-
-    ((El1 = El2, append([El1], TempList, NewList), paki(Tail, TempList));
-    (not(El1 = El2), append([El1], TempList, NewList), paki(Tail, TempList))), !.
+paki([El, El|Tail], NewList):-
+    paki([El|Tail], NewList), !.
+paki([El1, El2|Tail1], [El1|Tail2]):-
+    paki([El2|Tail1], Tail2).
 
 duplikeeri([], []).
 duplikeeri([El1|Tail], NewList):-
     duplikeeri(Tail, TempList),
     append([El1, El1], TempList, NewList).
+
+kordista([], 1, []).
+kordista([El], 1, [El]).
 
 paaris_arv(X):-
     0 =:= mod(X, 2).
