@@ -24,8 +24,8 @@ duplikeeri([El1|Tail], NewList):-
     duplikeeri(Tail, TempList),
     append([El1, El1], TempList, NewList).
 
-kordista([], 1, []).
-kordista([El], 1, [El]).
+kordista([], _, []).
+kordista([El], _, [El]).
 
 paaris_arv(X):-
     0 =:= mod(X, 2).
