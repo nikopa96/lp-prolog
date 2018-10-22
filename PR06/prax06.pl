@@ -25,5 +25,5 @@ ristkorrutis_alam([El1|Tail1], [El2|Tail2], [[El1, El2]|NewList]):-
     ristkorrutis_alam(Tail1, [El2|Tail2], NewList).
 
 ristkorrutis(_, [], []).
-ristkorrutis(FirstList, [El|Tail], [Cort|NewList]):-
-    ristkorrutis_alam(FirstList, [El], Cort), ristkorrutis(FirstList, Tail, NewList).
+ristkorrutis(FirstList, [El|Tail], NewList):-
+    ristkorrutis_alam(FirstList, [El], Cort), append(Cort, TempList, NewList), ristkorrutis(FirstList, Tail, TempList).
