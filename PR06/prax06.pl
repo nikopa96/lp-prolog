@@ -10,7 +10,7 @@ yhisosa([El|Tail], SecondList, NewList):-
 
 yhend([], El, El).
 yhend([El|Tail], SecondList, NewList):-
-    member(El, SecondList), !, yhend(SecondList, Tail, NewList).
+    member(El, SecondList), yhend(SecondList, Tail, NewList), !.
 yhend([El|Tail], SecondList, [El|NewList]):-
     yhend(SecondList, Tail, NewList).
 
