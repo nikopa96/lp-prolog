@@ -1,7 +1,3 @@
-append([], A, A).
-append([A|B], C, [A|D]):-
-    append(B, C, D).
-
 viimane_element(X, [X]).
 viimane_element(X, [_|Tail]):-
     viimane_element(X, Tail).
@@ -24,8 +20,17 @@ duplikeeri([El1|Tail], NewList):-
     duplikeeri(Tail, TempList),
     append([El1, El1], TempList, NewList).
 
+kordista_alam([], _, []).
+kordista_alam([El], N, [El|Tail]):-
+    N > 1,
+    kordista_alam([El], N - 1, Tail).
+kordista_alam([El], N, [El|Tail]):-
+    N =:= 1,
+    kordista_alam([], _, Tail).
+
 kordista([], _, []).
-kordista([El], _, [El]).
+kordista([El|Tail], N, NewList):-
+    kordista_alam([El], N, AlamList), append(AlamList, TempList, NewList), kordista(Tail, N, TempList). 
 
 paaris_arv(X):-
     0 =:= mod(X, 2).
@@ -49,4 +54,3 @@ vordle_predikaadiga([El|Tail], [Predicate, Param], NewList):-
     Predicate = suurem_kui,
         ((El > Param, append([El], TempList, NewList), vordle_predikaadiga(Tail, [Predicate, Param], TempList));
         (El =< Param, vordle_predikaadiga(Tail, [Predicate, Param], NewList))), !.
-        
