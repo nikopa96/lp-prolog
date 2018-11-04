@@ -13,13 +13,9 @@ on_eriliik(oistaim, taim).
 on_eriliik(mitteoistaim, taim).
 on_eriliik(kapsas, mitteoistaim).
 
-eats(kapsauss, kapsas).
-eats(loom, selgroogne).
-eats(loom, selgrootu).
-eats(selgroogne, selgrootu).
+eats(oistaim, mitteoistaim).
 eats(selgrootu, oistaim).
-eats(selgrootu, puuk).
-eats(loom, taim).
+eats(selgroogne, selgrootu).
 
 is_terminal(Parent, Node):-
     on_eriliik(Node, Parent),
@@ -38,3 +34,21 @@ count_terminals(Node, [Node], 1):-
     not(find_terminals(Node, _)), !.
 count_terminals(Node, Terminals, Count):-
     count_terminals_alam(Node, Terminals), length(Terminals, Count).
+
+find_extinction(Node, NextNode):-
+    eats(Node, NextNode).
+find_extinction(Node, NextNode):-
+    eats(Node, MiddleNode), 
+    find_extinction(MiddleNode, NextNode).
+
+extinction_alam_1(Node, NewList):-
+    findall(Extinction, find_extinction(Node, Extinction), NewList).
+
+extinction_alam_2([], []).
+extinction_alam_2([El|List], ExtinctionList):-
+    count_terminals_alam(El, NewList), append(NewList, TempList, ExtinctionList), extinction_alam_2(List, TempList). 
+
+extinction(Who, What_spieces, How_many):-
+    extinction_alam_1(Who, List),
+    extinction_alam_2(List, What_spieces),
+    length(What_spieces, How_many).
