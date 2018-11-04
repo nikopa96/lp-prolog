@@ -28,10 +28,10 @@ find_terminals(Node, NextNode):-
     find_terminals(MiddleNode, NextNode).
 
 count_terminals_alam(Node, NewList):-
-    findall(TerminalNode, find_terminals(Node, TerminalNode), NewList).
+    find_terminals(Node, _), findall(TerminalNode, find_terminals(Node, TerminalNode), NewList), !.
+count_terminals_alam(Node, [Node]):-
+    not(find_terminals(Node, _)).
 
-count_terminals(Node, [Node], 1):-
-    not(find_terminals(Node, _)), !.
 count_terminals(Node, Terminals, Count):-
     count_terminals_alam(Node, Terminals), length(Terminals, Count).
 
