@@ -1,6 +1,3 @@
-max3(X, Y, X) :- X > Y, !.
-max3(X, Y, Y) :- X =< Y.
-
 on_eriliik(s,d).
 on_eriliik(t,d).
 on_eriliik(s1,s).
