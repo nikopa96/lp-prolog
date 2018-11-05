@@ -56,12 +56,6 @@ extinction(Who, What_spieces, How_many):-
 
 :-dynamic extinction_stat/3.
 
-% extinction_define_facts([]).
-% extinction_define_facts([El|List]):-
-%     extinction(El, What_spieces, How_many),
-%     assert(extinction_stat(El, What_spieces, How_many)),
-%     extinction_define_facts(List).
-
 extinction_define_facts([], _, Extinction):-
     extinction(Extinction, What_spieces, How_many),
     assert(extinction_stat(Extinction, What_spieces, How_many)).
@@ -71,6 +65,8 @@ extinction_define_facts([El|List], Max, Extinction):-
     (How_many > Max, extinction_define_facts(List, How_many, El))), !.
 
 find_most_sensitive_species(Node, N, List):-
-    extinction_alam_1(Node, ExtinctionList),
-    extinction_define_facts(ExtinctionList, 0, NewNode),
-    extinction_stat(NewNode, N, List), !.
+    extinction_alam_1(Node, [PreLastNode|ExtinctionList]),
+    eats(LastNode, PreLastNode),
+    extinction_define_facts([LastNode, PreLastNode, ExtinctionList], 0, NewNode),
+    extinction_stat(NewNode, N, List), 
+    retractall(extinction_stat(_, _, _)), !.
