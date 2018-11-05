@@ -65,5 +65,5 @@ find_most_sensitive_species(Node, N, List):-
     extinction_alam_1(Node, [PreLastNode|ExtinctionList]),
     eats(LastNode, PreLastNode),
     extinction_define_facts([LastNode, PreLastNode, ExtinctionList], 0, NewNode),
-    extinction_stat(NewNode, N, List), 
+    extinction_stat(NewNode, List, N), 
     retractall(extinction_stat(_, _, _)), !.
