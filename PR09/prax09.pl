@@ -1,14 +1,3 @@
-% lihtlause --> nimisonafraas, tegusonafraas.
-% nimisonafraas --> nimisona, omadussonafraas, nimisona.
-% nimisonafraas --> nimisona, nimisonafraas; [].
-% nimisona --> [pakapiku]; [habe]; [tema]; [sobimatuse]; [jouluvanaks].
-
-% omadussonafraas --> maarsona, omadussona.
-% maarsona --> [liiga].
-% omadussona --> [lyhike].
-% tegusonafraas --> tegusona, nimisonafraas.
-% tegusona --> [tingib]; [pohjustab].
-
 liitlause --> lihtlause.
 liitlause --> lihtlause, koma, liitlause.
 
