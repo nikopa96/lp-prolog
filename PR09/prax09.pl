@@ -10,6 +10,7 @@
 % tegusona --> [tingib]; [pohjustab].
 
 liitlause --> lihtlause.
+liitlause --> lihtlause, koma, liitlause.
 
 lihtlause --> nimisonafraas, tegusonafraas.
 nimisonafraas --> nimisona, omadussonafraas, nimisona.
@@ -31,4 +32,4 @@ negatiivne_tegusona --> ei, [kasva].
 tapsus --> [upakile].
 
 ei --> [ei].
-koma --> [','].
+koma --> [, ].
