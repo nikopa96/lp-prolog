@@ -1,3 +1,7 @@
+% 
+% Source: https://courses.cs.ttu.ee/w/images/f/f9/ITI0021_Praktikum_9_kabe_2015.pl
+%
+
 main(MyColor):-
     ruut(X,Y, MyColor), 
     nl, write([MyColor, 'Nupp ', ruudul, X,Y]),
