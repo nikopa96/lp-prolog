@@ -6,7 +6,7 @@ main(MyColor):-
     ruut(X,Y, MyColor), 
     nl, write([MyColor, 'Nupp ', ruudul, X,Y]),
     leia_suund(MyColor,Suund),
-    kaigu_variandid(X,Y,Suund,X1,Y1), ,
+    kaigu_variandid(X,Y,Suund,X1,Y1),
     !.
 main(_).
 
