@@ -20,6 +20,16 @@ votmine(X,Y,Suund,X1,Y1):-
     
     vota(X,Y,Suund,X1,Y1,X2,Y2),
     fail.
+
+vota(X, Y, _, X1, Y1, X2, Y2):-
+    ruut(X, Y, Status),
+    retract(ruut(X, Y, _)),
+    retract(ruut(X1, Y1, _)),
+    retract(ruut(X2, Y2, _)),
+    assert(ruut(X, Y, 0)),
+    assert(ruut(X1, Y1, 0)),
+    assert(ruut(X2, Y2, Status)).
+
 %--------
 kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine edasi paremale
     X1 is X + Suund,
@@ -128,27 +138,6 @@ Status = 0      % tühi
 Status = 1      % valge
 Status = 2      %  must
 */
-
-%=================== Print checkers board - Start ==================
-print_board :-
-	print_squares(8).
-
-print_squares(Row) :-
-	between(1, 8, Row),
-	write('|'), print_row_squares(Row, 1), write('|'), nl,
-	NewRow is Row - 1,
-	print_squares(NewRow), !.
-print_squares(_) :- !.
-
-
-print_row_squares(Row, Col) :-
-	between(1, 8, Col),
-	ruut(Col, Row, Status), write(' '), write(Status), write(' '),
-	NewCol is Col + 1,
-	print_row_squares(Row, NewCol), !.
-print_row_squares(_, _) :- !.
-
-%=================== Print checkers board - End ====================
 
 %=================== Print checkers board v2 - Start ==================
 status_sq(ROW,COL):-
