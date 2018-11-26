@@ -33,6 +33,7 @@ votmine(X, Y, Suund, X1, Y1):-
 
 votmine(X,Y,Suund,X1,Y1):-
     not(ruut(X, Y, 10)),
+    not(ruut(X, Y, 20)),
     kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2),
     vota(X,Y,Suund,X1,Y1,X2,Y2),
     fail.
