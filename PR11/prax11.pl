@@ -19,9 +19,21 @@ kaigu_variandid(X,Y,Suund,X1,Y1):-
 kaigu_variandid(X,Y,Suund,X1,Y1):-
     kaimine(X,Y,Suund,X1,Y1),!.
 %--------------------------------
+votmine(X, Y, Suund, X1, Y1):-
+    ruut(X, Y, 10),
+    leida_diagonaal(10, X, Y, Suund, X1, Y1, Xafter, Yafter),
+    vota(X, Y, Suund, X1, Y1, Xafter, Yafter),
+    fail.
+
+votmine(X, Y, Suund, X1, Y1):-
+    ruut(X, Y, 20),
+    leida_diagonaal(20, X, Y, Suund, X1, Y1, Xafter, Yafter),
+    vota(X, Y, Suund, X1, Y1, Xafter, Yafter),
+    fail.
+
 votmine(X,Y,Suund,X1,Y1):-
+    not(ruut(X, Y, 10)),
     kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2),
-    
     vota(X,Y,Suund,X1,Y1,X2,Y2),
     fail.
 
@@ -38,6 +50,7 @@ vota(X, Y, _, X1, Y1, X2, Y2):-
 kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine edasi paremale
     X1 is X + Suund,
     Y1 is Y + 1,
+    ruut(X, Y, MyColor),
     ruut(X1,Y1, Color),
     Color =\= MyColor, Color =\= 0,
     X2 is X1 + Suund,
@@ -46,6 +59,7 @@ kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine edasi paremale
 kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine edasi vasakule
     X1 is X + Suund,
     Y1 is Y - 1,
+    ruut(X, Y, MyColor),
     ruut(X1,Y1, Color),
     Color =\= MyColor, Color =\= 0,
     X2 is X1 + Suund,
@@ -54,6 +68,7 @@ kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine edasi vasakule
 kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine tagasi paremale
     X1 is X + Suund * -1,
     Y1 is Y + 1,
+    ruut(X, Y, MyColor),
     ruut(X1,Y1, Color),
     Color =\= MyColor, Color =\= 0,
     X2 is X1 + Suund * -1,
@@ -62,6 +77,7 @@ kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine tagasi paremale
 kas_saab_votta(X,Y,Suund,X1,Y1,X2,Y2):-  % Votmine tagasi vasakule
     X1 is X + Suund * -1,
     Y1 is Y - 1,
+    ruut(X, Y, MyColor),
     ruut(X1,Y1, Color),
     Color =\= MyColor, Color =\= 0,
     X2 is X1 + Suund * -1,
@@ -88,6 +104,42 @@ kas_naaber_vaba(X,Y,Suund,X1,Y1):-
 kas_naaber_vaba(X,Y,X1,Y1):-
     ruut(X,Y, Status),
     assert(ruut1(X1,Y1, Status)),!.
+
+leida_diagonaal(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
+    leida_diagonaal_alam_1(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter);
+    leida_diagonaal_alam_2(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter).
+
+leida_diagonaal_alam_1(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
+    Xend is X + Suund,
+    Yend is Y + 1,
+    Xafter is Xend + Suund,
+    Yafter is Yend + 1,
+    (MyColor =:= 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
+    (MyColor =:= 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0)).
+leida_diagonaal_alam_1(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
+    X1 is X + Suund,
+    Y1 is Y + 1,
+    ruut(X1, Y1, 0),
+    leida_diagonaal_alam_1(MyColor, X1, Y1, Suund, Xend, Yend, Xafter, Yafter).
+
+leida_diagonaal_alam_2(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
+    Xend is X + Suund,
+    Yend is Y - 1,
+    Xafter is Xend + Suund,
+    Yafter is Yend - 1,
+    (MyColor =:= 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
+    (MyColor =:= 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0)).
+leida_diagonaal_alam_2(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
+    X1 is X + Suund,
+    Y1 is Y - 1,
+    ruut(X1, Y1, 0),
+    leida_diagonaal_alam_2(MyColor, X1, Y1, Suund, Xend, Yend, Xafter, Yafter).
+
+% kas_naaber_vaba_tamm(X, Y, Suund, Xend, Yend):-
+%     kas_naaber_vaba(X, Y, Suund, Xend, Yend).
+% kas_naaber_vaba_tamm(X, Y, Suund, Xend, Yend):-
+%     kas_naaber_vaba(X, Y, Suund, X1, Y1),
+%     kas_naaber_vaba_tamm(X1, Y1, Suund, Xend, Yend).
 
 tee_kaik(X, Y, X1, Y1):-
     ruut(X, Y, Status1),
