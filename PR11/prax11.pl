@@ -115,8 +115,8 @@ leida_diagonaal_alam_1(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
     Yend is Y + 1,
     Xafter is Xend + Suund,
     Yafter is Yend + 1,
-    (MyColor =:= 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
-    (MyColor =:= 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0)).
+    ((MyColor = 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
+    (MyColor = 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0))).
 leida_diagonaal_alam_1(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
     X1 is X + Suund,
     Y1 is Y + 1,
@@ -128,8 +128,8 @@ leida_diagonaal_alam_2(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
     Yend is Y - 1,
     Xafter is Xend + Suund,
     Yafter is Yend - 1,
-    (MyColor =:= 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
-    (MyColor =:= 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0)).
+    ((MyColor = 10, ruut(Xend, Yend, 2), ruut(Xafter, Yafter, 0));
+    (MyColor = 20, ruut(Xend, Yend, 1), ruut(Xafter, Yafter, 0))).
 leida_diagonaal_alam_2(MyColor, X, Y, Suund, Xend, Yend, Xafter, Yafter):-
     X1 is X + Suund,
     Y1 is Y - 1,
