@@ -12,6 +12,7 @@ iapb164062(MyColor, Xin, Yin):-
     (Xin =\= 0, Yin =\= 0), X is Xin, Y is Yin, ruut(X, Y, MyColor),
     leia_suund(MyColor, Suund),
     kaigu_variandid(X, Y, Suund, _, _), !.
+iapb164062(_, _, _).
 
 tamm(10).
 tamm(20).
